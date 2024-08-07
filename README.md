@@ -1,4 +1,4 @@
-# Road Runner Quickstart
+# Framework
 
-Check out the [docs](https://rr.brott.dev/docs/v1-0/tuning/).
+An extension of roadrunenr-quickstart that provides some useful utility classes for easy development
 
