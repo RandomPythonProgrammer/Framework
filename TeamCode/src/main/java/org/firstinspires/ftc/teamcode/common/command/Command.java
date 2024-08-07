@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.common.command;
 import org.firstinspires.ftc.teamcode.common.Robot;
 
 /**
- * A generic command that robot does
+ * A generic command that robot does (paths, subsystem movements, etc.)
  */
 public interface Command {
     /**

@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.common.controller;
 
+/**
+ * Represents all the "Buttons" kind of misleading as it includes button down and button up events
+ */
 public enum Button {
     A_UP,
     B_UP,

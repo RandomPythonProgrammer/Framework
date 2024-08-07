@@ -5,12 +5,19 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * A listener for the buttons on the gamepad
+ */
 public class ButtonListener {
     private Gamepad last;
     private Gamepad current;
     private Gamepad gamepad;
     private HashMap<Button, ArrayList<Runnable>> listeners;
 
+    /**
+     * Crates the listener from a gamepad
+     * @param gamepad the gamepad to listen
+     */
     public ButtonListener(Gamepad gamepad) {
         last = new Gamepad();
         current = new Gamepad();
@@ -18,6 +25,10 @@ public class ButtonListener {
         listeners = new HashMap<>();
     }
 
+    /**
+     * Updates the listener by checking the gamepad
+     * @return this
+     */
     public ButtonListener update() {
         last.copy(current);
         current.copy(gamepad);
@@ -113,6 +124,10 @@ public class ButtonListener {
         return this;
     }
 
+    /**
+     * Calls all the listeners with updates
+     * @param button the update
+     */
     private void triggerListeners(Button button) {
         if (listeners.containsKey(button)) {
             for (Runnable listener : listeners.get(button)) {
@@ -121,6 +136,12 @@ public class ButtonListener {
         }
     }
 
+    /**
+     * Adds a new listener for a certain button
+     * @param button the button to listen for
+     * @param listener the callback
+     * @return this
+     */
     public ButtonListener addListener(Button button, Runnable listener) {
         if (!listeners.containsKey(button)) {
             listeners.put(button, new ArrayList<>());
@@ -129,6 +150,10 @@ public class ButtonListener {
         return this;
     }
 
+    /**
+     * Removes the listeners
+     * @return this
+     */
     public ButtonListener clearListeners() {
         listeners.clear();
         return this;

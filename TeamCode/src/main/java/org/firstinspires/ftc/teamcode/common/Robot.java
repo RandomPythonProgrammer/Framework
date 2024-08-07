@@ -16,7 +16,7 @@ public class Robot {
 
     /**
      * Constructs the subsystems and drive from the hardware map.
-     * @param hardwareMap
+     * @param hardwareMap the hardware map
      */
     public Robot(HardwareMap hardwareMap) {
         double dt = System.currentTimeMillis() - lastTime;
