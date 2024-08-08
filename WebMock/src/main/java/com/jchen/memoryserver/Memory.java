@@ -1,3 +1,5 @@
+package com.jchen.memoryserver;
+
 import java.util.Set;
 
 /**

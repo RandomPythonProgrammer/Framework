@@ -1,9 +1,11 @@
+package com.jchen.memoryserver;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Memory that is stored temporary in RAM
+ * com.jchen.memoryserver.Memory that is stored temporary in RAM
  */
 public class PersistentMemory implements Memory {
     private final Map<String, String> data;
