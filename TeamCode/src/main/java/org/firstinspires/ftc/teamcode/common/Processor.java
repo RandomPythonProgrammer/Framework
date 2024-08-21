@@ -49,7 +49,7 @@ public class Processor {
      * @return if the queue has work to do
      */
     public boolean isBusy() {
-       return commandQueue.isEmpty();
+       return !commandQueue.isEmpty();
     }
 
     /**
