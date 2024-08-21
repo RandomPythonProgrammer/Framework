@@ -31,15 +31,15 @@ public class Processor {
      */
     public void update(Robot robot) {
         long dt = System.currentTimeMillis() - lastTime;
-        Command current = commandQueue.peek();
-        if (current == null || current.isDone()) {
-            if (!commandQueue.isEmpty()) {
+        if (!commandQueue.isEmpty()) {
+            Command current = commandQueue.peek();
+            if (current == null || current.isDone()) {
                 current = commandQueue.remove();
             }
-        }
 
-        if (current != null) {
-            current.update(robot, dt);
+            if (current != null) {
+                current.update(robot, dt);
+            }
         }
         lastTime = System.currentTimeMillis();
     }
