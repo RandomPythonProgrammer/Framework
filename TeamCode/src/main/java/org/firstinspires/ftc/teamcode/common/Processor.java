@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.common;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.firstinspires.ftc.teamcode.common.command.Command;
 
 import java.util.Deque;
@@ -15,6 +14,8 @@ public class Processor {
 
     private final Deque<Command> commandQueue;
     private long lastTime;
+    @Getter
+    Command lastExecuted;
 
     /**
      * constructs an empty processor
@@ -22,11 +23,13 @@ public class Processor {
     public Processor() {
         commandQueue = new LinkedList<>();
         lastTime = System.currentTimeMillis();
+        lastExecuted = null;
     }
 
     /**
      * Check the status of the current command, pulls a new command from the queue if needed.
      * Runs the update of the current command one cycle.
+     *
      * @param robot the robot
      */
     public void update(Robot robot) {
@@ -34,7 +37,7 @@ public class Processor {
         if (!commandQueue.isEmpty()) {
             Command current = commandQueue.peek();
             if (current == null || current.isDone()) {
-                current = commandQueue.remove();
+                lastExecuted = commandQueue.remove();
             }
 
             if (current != null) {
@@ -46,14 +49,16 @@ public class Processor {
 
     /**
      * Checks if the queue has tasks
+     *
      * @return if the queue has work to do
      */
     public boolean isBusy() {
-       return !commandQueue.isEmpty();
+        return !commandQueue.isEmpty();
     }
 
     /**
      * Add a new Command to the processor
+     *
      * @param command the command to be added
      */
     public void add(Command command) {
@@ -62,6 +67,7 @@ public class Processor {
 
     /**
      * Gets the last command in the queue
+     *
      * @return the last command in the queue
      */
     public Command getLast() {
@@ -70,6 +76,7 @@ public class Processor {
 
     /**
      * Clears the queue and adds the current action
+     *
      * @param command
      */
     public void override(Command command) {
