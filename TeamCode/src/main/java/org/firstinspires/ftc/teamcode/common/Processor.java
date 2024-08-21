@@ -12,11 +12,8 @@ import java.util.LinkedList;
  * You can just set the current command or also manipulate the queue to schedule commands.
  */
 public class Processor {
-    @Getter
+
     private final Deque<Command> commandQueue;
-    @Getter
-    @Setter
-    private Command current;
     private long lastTime;
 
     /**
@@ -25,7 +22,6 @@ public class Processor {
     public Processor() {
         commandQueue = new LinkedList<>();
         lastTime = System.currentTimeMillis();
-        current = null;
     }
 
     /**
@@ -35,6 +31,7 @@ public class Processor {
      */
     public void update(Robot robot) {
         long dt = System.currentTimeMillis() - lastTime;
+        Command current = commandQueue.peek();
         if (current == null || current.isDone()) {
             if (!commandQueue.isEmpty()) {
                 current = commandQueue.remove();
@@ -52,7 +49,32 @@ public class Processor {
      * @return if the queue has work to do
      */
     public boolean isBusy() {
-       return (current == null || current.isDone()) && commandQueue.isEmpty();
+       return commandQueue.isEmpty();
+    }
+
+    /**
+     * Add a new Command to the processor
+     * @param command the command to be added
+     */
+    public void add(Command command) {
+        commandQueue.add(command);
+    }
+
+    /**
+     * Gets the last command in the queue
+     * @return the last command in the queue
+     */
+    public Command getLast() {
+        return commandQueue.peekLast();
+    }
+
+    /**
+     * Clears the queue and adds the current action
+     * @param command
+     */
+    public void override(Command command) {
+        commandQueue.clear();
+        add(command);
     }
 }
 
